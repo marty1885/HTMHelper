@@ -123,7 +123,7 @@ int main(int argc, char** argv)
 
 	std::cout << "Welcome to the Rock Paper Scissors game. In this game you (P1) is playing against an AI player implemnted in HTM."
 	" This agent will learn your patterns as the game goes on and tetermin the next move according to the predictions it made."
-	"\nYou can also use rock_paper_scissors -a to let the AI play against it self.\n"
+	"\nYou can also use \033[1;37mrock_paper_scissors -a\033[0m to let the AI play against it self.\n"
 	"Have fun!\n\n";
 
 	//Initialize both AI
