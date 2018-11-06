@@ -1,0 +1,4 @@
+project(rock_paper_scissors)
+
+add_executable(rock_paper_scissors rock_paper_scissors.cpp)
+target_link_libraries(rock_paper_scissors nupic_core)
