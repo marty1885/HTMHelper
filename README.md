@@ -41,8 +41,8 @@ sudo make install
 ```
 
 ### NOTE: Building NuPIC.core
-``` sh
 NuPIC.core is a bit annoning to build. Here is how
+``` sh
 git clone https://github.com/numenta/nupic.core
 cd nupic.core
 export NUPIC_CORE=`pwd`
