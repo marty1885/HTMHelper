@@ -4,16 +4,25 @@
 
 #include "HTMHelper/HTMHelper.hpp"
 
+#include <xtensor/xrandom.hpp>
+
 using namespace HTM;
 
 const int CATEGORY_LEN = 16;
 const int TP_DEPTH = 16;
-const int NUM_EPOCH = 4;
+const int NUM_EPOCH = 400;
+
+auto noise()
+{
+	auto r = xt::random::rand<float>({CATEGORY_LEN*2}) < 0.2;
+	std::cout << xt::cast<bool>(r) << std::endl;
+	return xt::cast<bool>(r);
+}
 
 //Abusing the TemporalPooler to solve the XOR problem
 int main()
 {
-	TemporalPooler tp({CATEGORY_LEN*2}, TP_DEPTH);
+	TemporalMemory tp({CATEGORY_LEN*2}, TP_DEPTH);
 	CategoryEncoder encoder(2, CATEGORY_LEN);
 
 	xt::xarray<int> x({{0,0}, {0,1}, {1,0}, {1,1}});
@@ -24,6 +33,8 @@ int main()
 		for(int j=0;j<4;j++) {
 			auto input = xt::view(x, j);
 			auto output = xt::view(y, j);
+			
+			std::cout << noise() << std::endl;
 			
 			//Train the TemporalPooler with the sequence
 			//First the two inputs
@@ -55,6 +66,7 @@ int main()
 
 		std::cout << input[0] << " xor " << input[1]
 			<< " = "<< prediction << std::endl;
+		std::cout << pred << "\n";
 
 		tp.reset();
 	}

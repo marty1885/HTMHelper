@@ -39,14 +39,22 @@ inline std::vector<UInt> sparsify(const xt::xarray<bool>& t)
 	return v;
 }
 
+inline xt::xarray<float> softmax(const xt::xarray<float>& x)
+{
+	auto z = x - xt::amax(x)[0];
+	auto e = xt::eval(xt::exp(z));
+	return e/xt::sum(e);
+}
+
 //Calcluate the ratio of 1 per category
-inline xt::xarray<float> categroize(int num_category, int len_per_category,const xt::xarray<bool>& in)
+inline xt::xarray<float> categroize(int num_category, int len_per_category,const xt::xarray<bool>& in, bool normalize = true)
 {
 	xt::xarray<float> res = xt::zeros<float>({num_category});
 	assert(res.size()*len_per_category == in.size());
 	for(size_t i=0;i<in.size();i++)
 		res[i/len_per_category] += (float)in[i];
-	res /= len_per_category;
+	if(normalize == true)
+		res /= len_per_category;
 	return res;
 }
 
@@ -459,3 +467,4 @@ protected:
 };
 
 } //End of namespace HTM
+

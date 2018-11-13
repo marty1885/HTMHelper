@@ -184,6 +184,4 @@ int main(int argc, char** argv)
 	std::cout << "P1 Wins " << p1_win << " times, " << (float)p1_win/num_games << "\n";
 	std::cout << "P2 Wins " << p2_win << " times, " << (float)p2_win/num_games << "\n";
 	std::cout << "draw: " << draw << std::endl;
-
-
 }
